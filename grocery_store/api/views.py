@@ -33,8 +33,8 @@ class Registration_View(generics.CreateAPIView):
 
 
 class Item_Viewset(viewsets.ModelViewSet):
-    # permission_classes = [CorrectedDjangoModelPermissions]
-    # authentication_classes = [TokenAuthentication]
+    permission_classes = [CorrectedDjangoModelPermissions]
+    authentication_classes = [TokenAuthentication]
     serializer_class = Item_Serializer
     pagination_class = PageNumberPagination
     filter_backends = (SearchFilter, OrderingFilter)
@@ -57,7 +57,7 @@ class Account_Viewset(viewsets.ModelViewSet):
 
 
 @api_view(["GET", "POST"])
-# @authentication_classes([TokenAuthentication])
+@authentication_classes([TokenAuthentication])
 def bill(request):
     if request.method == "GET":
         bills = Bill.objects.all()
