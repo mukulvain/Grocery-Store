@@ -13,6 +13,7 @@ urlpatterns = [
     path("", include(router.urls)),
     path("login/", obtain_auth_token),
     path("register/", Registration_View.as_view()),
+    path("staff/", Staff_View.as_view()),
     path("bill/", bill),
     path("bill/<str:bill_no>", bill_specific),
     path("customer_bill/<str:mobile_no>", customer_bill),
