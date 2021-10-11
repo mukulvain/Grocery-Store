@@ -56,8 +56,9 @@ To reproduce this code you need to go through the following steps:
 1. As soon as a bill is generated, the corresponding items are subtracted from the inventory.
 2. In case a bill is updated, the corresponding item quantity will also be updated.
 3. Owner can segregate his staff into groups and give specific permissions.
-4. Pagination provided
+4. Pagination provided. You can control pagination in grocery_store/grocery_store.settings.py
 5. Added Search and Filtering to Item and Account
+6. Total Price of the bill is adjusted according to the items.
 
 ### Postman Workspace
 https://www.postman.com/technical-geologist-31086137/workspace/grocery-store
