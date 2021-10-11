@@ -51,4 +51,4 @@ class Command(BaseCommand):
         Owner()
         Cashier()
         Inventory_Admin()
-        self.stdout.write("Groups Created")
+        self.stdout.write("Groups created successfully.")

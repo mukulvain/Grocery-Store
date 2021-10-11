@@ -21,7 +21,7 @@ class Item_Admin(admin.ModelAdmin):
 class Account_Admin(admin.ModelAdmin):
     model = Account
     ordering = ("name",)
-    search_fields = ("name", "mobile_no")
+    search_fields = ("mobile_no",)
     list_display = ("name", "mobile_no")
     list_filter = ()
     filter_horizontal = ()
@@ -31,12 +31,14 @@ class Account_Admin(admin.ModelAdmin):
 class Bill_Admin(admin.ModelAdmin):
     model = Bill
     ordering = ("-date_time",)
-    search_fields = ("bill_no", "name_id__name")
-    list_display = ("bill_no", "name", "date_time")
+    search_fields = ("bill_no", "customer_id__mobile_no")
+    list_display = ("bill_no", "customer", "date_time", "total_price")
     list_filter = ()
     filter_horizontal = ()
-    readonly_fields = ("date_time",)
-    fieldsets = ((None, {"fields": ("bill_no", "name", "date_time")}),)
+    readonly_fields = ("date_time", "total_price")
+    fieldsets = (
+        (None, {"fields": ("bill_no", "customer", "date_time", "total_price")}),
+    )
 
     inlines = [Bill_Item_Inline]
 

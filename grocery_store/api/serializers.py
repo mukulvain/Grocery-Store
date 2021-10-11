@@ -24,7 +24,7 @@ class Bill_Serializer(serializers.ModelSerializer):
 class Bill_Item_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Bill_Item
-        fields = "__all__"
+        exclude = ("s_no",)
 
 
 class Registration_Serializer(serializers.ModelSerializer):
