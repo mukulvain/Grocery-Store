@@ -12,7 +12,7 @@ A REST API for a grocery store.
 
 ### ER diagram:
 
-The ER Diagram for this API can be found here.
+The ER Diagram for this API can be found here.  
 https://drawsql.app/society-management/diagrams/grocery-store#
 
 ### How to Reproduce:
@@ -30,7 +30,7 @@ To reproduce this code you need to go through the following steps:
 2. Setting up MySQL: (OPTIONAL if you are using sqlite)
     1. Check in grocery_store/grocery_store.settings.py
 
-4. Setting up Django:  
+3. Setting up Django:  
    Enter the following commands in your command line. 
    1. python3 manage.py makemigrations
    2. python3 manage.py migrate
@@ -38,9 +38,9 @@ To reproduce this code you need to go through the following steps:
    4. python3 manage.py create_groups
    5. python3 manage.py runserver
 
-5. To check the Backend you can go to:
+4. To check the Backend you can go to:
     1. 127.0.0.1:8000/admin/
-    2. 127.0.0.1:8000/api/slug
+    2. 127.0.0.1:8000/api/slug  
     The slug can be found in grocery_store/api/urls.py
 
 ### Assumptions
