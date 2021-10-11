@@ -41,13 +41,14 @@ To reproduce this code you need to go through the following steps:
 4. To check the Backend you can go to:
     1. 127.0.0.1:8000/admin/
     2. 127.0.0.1:8000/api/slug  
-    The slug can be found in grocery_store/api/urls.py
+    The appropriate slug can be found in grocery_store/api/urls.py or in the Postman Workspace
 
 ### Assumptions
 
 1. User is identified by mobile number.
 2. Grocery Items do not have taxes.
 3. Bills can not be deleted. (Unethical to delete the bills)
+4. Grocery Items are generally not identified by code, rather identified by name
 
 
 ### Features
