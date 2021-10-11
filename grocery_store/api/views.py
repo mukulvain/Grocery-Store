@@ -4,7 +4,11 @@ from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import DjangoModelPermissions
 from .models import *
-from rest_framework.decorators import api_view
+from rest_framework.decorators import (
+    api_view,
+    authentication_classes,
+    permission_classes,
+)
 from .serializers import *
 from rest_framework.response import Response
 
@@ -23,7 +27,7 @@ class CorrectedDjangoModelPermissions(DjangoModelPermissions):
 
 class Registration_View(generics.CreateAPIView):
     permission_classes = [CorrectedDjangoModelPermissions]
-    # authentication_classes = [TokenAuthentication]
+    authentication_classes = [TokenAuthentication]
     queryset = User.objects.all()
     serializer_class = Registration_Serializer
 
@@ -42,7 +46,7 @@ class Item_Viewset(viewsets.ModelViewSet):
 
 class Account_Viewset(viewsets.ModelViewSet):
     permission_classes = [CorrectedDjangoModelPermissions]
-    # authentication_classes = [TokenAuthentication]
+    authentication_classes = [TokenAuthentication]
     serializer_class = Account_Serializer
     pagination_class = PageNumberPagination
     filter_backends = (SearchFilter, OrderingFilter)
@@ -53,6 +57,8 @@ class Account_Viewset(viewsets.ModelViewSet):
 
 
 @api_view(["GET", "POST"])
+@authentication_classes([TokenAuthentication])
+@permission_classes([CorrectedDjangoModelPermissions])
 def bill(request):
     if request.method == "GET":
         bills = Bill.objects.all()
@@ -96,6 +102,8 @@ def bill(request):
 
 
 @api_view(["GET", "PUT"])
+@authentication_classes([TokenAuthentication])
+@permission_classes([CorrectedDjangoModelPermissions])
 def bill_specific(request, bill_no):
     try:
         Bill.objects.get(bill_no=bill_no)
@@ -134,6 +142,8 @@ def bill_specific(request, bill_no):
 
 
 @api_view(["GET"])
+@authentication_classes([TokenAuthentication])
+@permission_classes([CorrectedDjangoModelPermissions])
 def customer_bill(request, mobile_no):
     try:
         Account.objects.get(mobile_no=mobile_no)
