@@ -57,7 +57,7 @@ class Registration_Serializer(serializers.ModelSerializer):
         return staff_account
 
 
-# class User_Serializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = User
-#         fields = ('username',)
+class User_Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username',)
