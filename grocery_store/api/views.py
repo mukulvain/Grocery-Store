@@ -7,7 +7,6 @@ from .models import *
 from rest_framework.decorators import (
     api_view,
     authentication_classes,
-    permission_classes,
 )
 from .serializers import *
 from rest_framework.response import Response
@@ -31,7 +30,14 @@ class Registration_View(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = Registration_Serializer
 
-
+class Staff_View(generics.ListAPIView):
+    permission_classes = [CorrectedDjangoModelPermissions]
+    authentication_classes = [TokenAuthentication]
+    queryset = User.objects.all()
+    serializer_class = User_Serializer
+    filter_backends = (SearchFilter, OrderingFilter)
+    search_fields = ("username",)
+    
 class Item_Viewset(viewsets.ModelViewSet):
     permission_classes = [CorrectedDjangoModelPermissions]
     authentication_classes = [TokenAuthentication]
