@@ -33,12 +33,12 @@ class Registration_View(generics.CreateAPIView):
 
 
 class Item_Viewset(viewsets.ModelViewSet):
-    permission_classes = [CorrectedDjangoModelPermissions]
-    authentication_classes = [TokenAuthentication]
+    # permission_classes = [CorrectedDjangoModelPermissions]
+    # authentication_classes = [TokenAuthentication]
     serializer_class = Item_Serializer
     pagination_class = PageNumberPagination
     filter_backends = (SearchFilter, OrderingFilter)
-    search_fields = ("name",)
+    search_fields = ("name","category")
 
     def get_queryset(self):
         return Item.objects.all()
@@ -50,15 +50,14 @@ class Account_Viewset(viewsets.ModelViewSet):
     serializer_class = Account_Serializer
     pagination_class = PageNumberPagination
     filter_backends = (SearchFilter, OrderingFilter)
-    search_fields = ("mobile_no",)
+    search_fields = ("mobile_no","name")
 
     def get_queryset(self):
         return Account.objects.all()
 
 
 @api_view(["GET", "POST"])
-@authentication_classes([TokenAuthentication])
-@permission_classes([CorrectedDjangoModelPermissions])
+# @authentication_classes([TokenAuthentication])
 def bill(request):
     if request.method == "GET":
         bills = Bill.objects.all()
@@ -98,12 +97,12 @@ def bill(request):
         else:
             serializer_bill_item.save()
             resp = Bill.objects.filter(bill_no=bill_no)[0]
-            return Response(resp, status=status.HTTP_201_CREATED)
+            serialized_resp = Bill_Serializer(resp).data
+            return Response(serialized_resp, status=status.HTTP_201_CREATED)
 
 
 @api_view(["GET", "PUT"])
 @authentication_classes([TokenAuthentication])
-@permission_classes([CorrectedDjangoModelPermissions])
 def bill_specific(request, bill_no):
     try:
         Bill.objects.get(bill_no=bill_no)
@@ -137,14 +136,14 @@ def bill_specific(request, bill_no):
         else:
             serializer_bill_item.save()
             resp = Bill.objects.filter(bill_no=bill_no)[0]
-            serialized_resp = Bill_Serializer(data=resp)
+            serialized_resp = Bill_Serializer(resp).data
             return Response(serialized_resp, status=status.HTTP_202_ACCEPTED)
 
 
 @api_view(["GET"])
 @authentication_classes([TokenAuthentication])
-@permission_classes([CorrectedDjangoModelPermissions])
 def customer_bill(request, mobile_no):
+
     try:
         Account.objects.get(mobile_no=mobile_no)
     except Account.DoesNotExist:
